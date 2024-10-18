@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.10;
+pragma solidity ^0.8.0;
 
 import "forge-std/Test.sol"; 
 import "../src/SignatureVerification.sol"; 
@@ -60,7 +60,6 @@ contract SignatureVerificationTest is Test {
         bytes32 messageHash = keccak256(abi.encodePacked(notWhitelisted, amount));
         (uint8 v, bytes32 r, bytes32 s) = vm.sign(2, messageHash);
 
-        
         vm.prank(notWhitelisted);
         vm.expectRevert("Not whitelisted");
         sigVerification.verifyAndClaim(messageHash, abi.encodePacked(r, s, v), amount);
